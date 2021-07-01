@@ -3,12 +3,15 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	port := os.Getenv("PORT")
 	page := gin.Default()
 	theme := template.Must(template.New("main").ParseGlob("templates/*"))
 
@@ -25,6 +28,8 @@ func main() {
 			x++
 		}
 
-		result.HTML(http.StatusOK, "content.tmpl", gin.H{"data": data})
+		result.HTML(http.StatusOK, "index.tmpl", gin.H{"data": data})
 	})
+
+	log.Fatal(page.Run(":" + port))
 }
