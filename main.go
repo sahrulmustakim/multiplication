@@ -28,7 +28,7 @@ func main() {
 			x++
 		}
 
-		result.HTML(http.StatusOK, "index.tmpl", gin.H{"data": data})
+		result.HTML(http.StatusOK, "content.tmpl", gin.H{"data": data})
 	})
 
 	log.Fatal(page.Run(":" + port))
