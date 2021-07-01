@@ -4,9 +4,11 @@
         <td>
             {{ range $i, $a := .data }}
                 {{ if mod $i 9 }}
+                    <div style="border: 1px solid #000;width: 100px;">{{ $a }}</div>
+                {{ else }}
                     </td><td>
+                    <div style="border: 1px solid #000;width: 100px;">{{ $a }}</div>
                 {{ end }}
-                <div style="border: 1px solid #000;">{{ $a }}</div>
             {{ end }}
         </td>
     </tr>
