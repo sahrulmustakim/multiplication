@@ -3,23 +3,17 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
-	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	port := os.Getenv("PORT")
+	page := gin.Default()
+	theme := template.Must(template.New("main").ParseGlob("templates/*"))
 
-	r := gin.Default()
-
-	t := template.Must(template.New("main").ParseGlob("templates/*"))
-
-	r.SetHTMLTemplate(t)
-
-	r.GET("/", func(c *gin.Context) {
+	page.SetHTMLTemplate(theme)
+	page.GET("/", func(result *gin.Context) {
 		data := []string{}
 		var x, y = 1, 1
 		for x <= 9 {
@@ -31,8 +25,6 @@ func main() {
 			x++
 		}
 
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{"data": data})
+		result.HTML(http.StatusOK, "content.tmpl", gin.H{"data": data})
 	})
-
-	log.Fatal(r.Run(":" + port))
 }
