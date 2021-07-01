@@ -25,10 +25,9 @@ func main() {
 				y++
 			}
 			y = 1
+			result.HTML(http.StatusOK, "content.tmpl", gin.H{"data": data})
 			x++
 		}
-
-		result.HTML(http.StatusOK, "content.tmpl", gin.H{"data": data})
 	})
 
 	log.Fatal(page.Run(":" + port))
