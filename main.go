@@ -7,13 +7,14 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/Masterminds/sprig"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	port := os.Getenv("PORT")
 	page := gin.Default()
-	theme := template.Must(template.New("main").ParseGlob("templates/*"))
+	theme := template.Must(template.New("main").Funcs(sprig.FuncMap()).ParseGlob("templates/*"))
 
 	page.SetHTMLTemplate(theme)
 	page.GET("/", func(result *gin.Context) {
