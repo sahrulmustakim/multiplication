@@ -1,9 +1,14 @@
 {{define "content.tmpl"}}
 <table>
-    {{ range .data }}
     <tr>
-        <td style="border: 1px solid #000;">{{ . }}</td>
+        <td>
+            {{ range $i, $a := .data }}
+                {{ if $i % 9 == 0 }}
+                    </td><td>
+                {{ end }}
+                <div style="border: 1px solid #000;">{{ $a }}</div>
+            {{ end }}
+        </td>
     </tr>
-    {{ end }}
 </table>
 {{end}}
